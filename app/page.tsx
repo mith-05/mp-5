@@ -24,13 +24,14 @@ export default function Home() {
         setMessage("");
         setShortUrl("");
 
-        // Call our server action to save the URL and alias.
+        // saves the URL and alias.
         const result = await UrlShortener(url, alias);
 
         // Display the message returned by the server action.
         setMessage(result.message);
 
-        // If successful, construct the shortened URL.
+        // If successful, construct the shortened URL
+        // window .location.origin is the original url then we add the route to redirect users followed by the alias that is converted into a url safe format.
         if (result.success) {
             setShortUrl(window.location.origin + "/r/" + encodeURIComponent(alias));
         }
@@ -38,15 +39,10 @@ export default function Home() {
 
     return (
         <main>
-            {/* Main heading of our application. */}
             <h1>URL Shortener</h1>
-
-            {/* Brief description of the website. */}
             <p>
                 Enter a URL and create a shorter link using a custom alias.
             </p>
-
-            {/* Call handleSubmit when the form is submitted. */}
             <form onSubmit={handleSubmit}>
 
                 <label htmlFor="url">Original URL:</label>
